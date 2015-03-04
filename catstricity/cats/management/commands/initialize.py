@@ -1,5 +1,5 @@
-import glob
 import os
+from lxml import etree
 
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
@@ -13,6 +13,12 @@ class Command(BaseCommand):
     option_list = BaseCommand.option_list
 
     def handle(self, *labels, **options):
-        for i, fname in enumerate(glob.glob('photos/*')):
-            new_cat = Cat(name='Cat {}'.format(i))
-            new_cat.image.save(os.path.basename(fname), File(open(fname, 'r')))
+        xml_file = 'photos/metadata.xml'
+        root = etree.parse(open(xml_file))
+        database_tag = root.getroot()
+        for cat in database_tag.getchildren():
+            name = cat.find('name').text
+            file = cat.find('file').text
+            new_cat = Cat(name=name)
+            new_cat.image.save(os.path.basename(file), File(open(file)), save=False)
+            new_cat.save()

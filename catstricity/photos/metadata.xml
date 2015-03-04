@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<database>
+    <cat>
+        <name>African Wild Cat</name>
+        <file>photos/1200px-AfricanWildCat.jpg</file>
+    </cat>
+    <cat>
+        <name>Lots of cats</name>
+        <file>photos/1200px-Cat_poster_1.jpg</file>
+    </cat>
+    <cat>
+        <name>Kitten</name>
+        <file>photos/1200px-Three-hour-old-kitten.jpg</file>
+    </cat>
+</database>
