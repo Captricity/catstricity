@@ -1,0 +1,17 @@
+<html>
+    <head>
+        <title>Catstricity</title>
+    </head>
+    <body>
+        <div>
+            {% if cats %}
+                <h1>Don't worry, cats are here!</h1>
+                {% for cat in cats %}
+                    <div><img src="{% url 'cats.views.photo' cat.id %}" /></div>
+                {% endfor %}
+            {% else %}
+                <h1>Oh no! We don't have any cat photos for you...</h1>
+            {% endif %}
+        </div> 
+    </body>
+</html>
