@@ -55,3 +55,4 @@ target/
 
 catstricity/media/*
 db.sqlite3
+*.pem
