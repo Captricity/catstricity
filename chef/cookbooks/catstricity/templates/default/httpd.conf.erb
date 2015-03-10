@@ -1,0 +1,10 @@
+WSGIScriptAlias / /mnt/chef-repo/application/catstricity/catstricity/wsgi.py
+WSGIPythonPath /mnt/chef-repo/application/catstricity/
+WSGIDaemonProcess ec2-52-1-220-47.compute-1.amazonaws.com python-path=/mnt/chef-repo/application/catstricity
+WSGIProcessGroup ec2-52-1-220-47.compute-1.amazonaws.com
+
+<Directory /mnt/chef-repo/application/catstricity/catstricity/>
+<Files wsgi.py>
+Require all granted
+</Files>
+</Directory>
