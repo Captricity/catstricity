@@ -11,13 +11,15 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+APPLICATION_NAME = 'catstricity'
+IS_DEPLOYMENT = os.path.exists('/mnt/application')
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y$o8hfj#l7e_0fq^@bctow94zq#5%1tq$hb5l*eu6+ic-w-dr('
+SECRET_KEY = os.environ.get('SECRET_KEY', '1234devdev')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -58,12 +60,24 @@ WSGI_APPLICATION = 'catstricity.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if IS_DEPLOYMENT:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': APPLICATION_NAME,
+            'USER': os.environ.get('DB_USER', APPLICATION_NAME),
+            'PASSWORD': os.environ['DB_PASSWORD'],
+            'HOST': os.environ.get('DB_HOST', 'localhost'),
+            'PORT': os.environ.get('DB_PORT', '')}}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -83,4 +97,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.environ.get('STATIC_ROOT', 'static')
 MEDIA_ROOT = 'media'
