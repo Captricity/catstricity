@@ -4,7 +4,10 @@
         "zlib1g-dev": null,
         "libxml2-dev": null,
         "libxslt1-dev": null,
-        "libjpeg-dev": null
+        "libtiff5-dev": null,
+        "libjpeg8-dev": null,
+        "libfreetype6-dev": null,
+        "liblcms2-dev": null
     },
     "pip": {
         "Django": "1.8.8",
