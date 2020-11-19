@@ -1,4 +1,4 @@
 Django==1.7.5
-Pillow==2.7.0
+Pillow==7.1.0
 gunicorn==19.1.0
 lxml==3.4.2
